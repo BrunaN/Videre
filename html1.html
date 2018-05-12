@@ -1,0 +1,350 @@
+<div id="teste-chrome-extension">
+
+<div id="overlay-top-teste" class="overlay-teste"></div>
+<div id="overlay-left-teste" class="overlay-teste"></div>
+<div id="overlay-right-teste" class="overlay-teste"></div>
+<div id="overlay-bottom-teste" class="overlay-teste"></div>
+
+<div class="content">
+    <h1>Brand</h1>
+    <span id="close">x</span>
+
+    <div class="infos">
+        <h3>Olá, seja bem-vindo !</h3>
+        <p>Aqui você pode contrubuir relatando erros e oferecendo sugestões, participando do desenvolvimento de um software feito para você.</p>
+    </div>
+
+    <div class="botao">
+        <button id="comecar">Começar</button>
+    </div>
+
+</div>
+
+<div class="modal-content">
+    <h2>
+        Relate um problema
+    </h2>
+    <select>
+        <option value="" disabled selected>O que você encontrou de estranho?</option>
+        <option value="1">Eu não entendi o que aconteceu</option>
+        <option value="2">Eu não entendi essa informação</option>
+        <option value="3">Isso não faz nenhum sentido para mim</option>
+        <option value="4">A espressão não faz sentido com o contexto inserido</option>
+        <option value="5">Mensagem irrelevante</option>
+        <option value="6">A informação não é habitual</option>
+        <option value="7">Me ofende</option>
+        <option value="8">Outro</option>
+    </select>
+
+    <label for="problem">Deixe um comentário</label>
+    <textarea name="" id="problem" rows="2">
+
+    </textarea>
+
+    <label for="sugest">Nos ajude com uma sugestão para o problema</label>
+    <textarea name="sugest" id="" rows="3">
+
+    </textarea>
+
+    <div class="botao">
+        <a id="close">Cancelar</a>
+        <button>Salvar</button>
+    </div>
+</div>
+
+<style>
+.overlay-teste{
+  background-color:#000;
+  opacity: 0.3;
+  position:absolute;
+  z-index:100000;
+}
+
+#teste-chrome-extension > *{
+  cursor: default;
+}
+
+#overlay-top-teste, #overlay-bottom-teste{
+  width:100%;
+}
+
+#overlay-top-teste{
+  top:0;
+}
+
+#overlay-bottom-teste{
+  top:0;
+}
+
+#overlay-left-teste{
+  left:0;
+}
+
+#overlay-right-teste{
+  right:0;
+}
+
+#teste-chrome-extension {
+    font-family:'Open Sans';
+}
+
+#teste-chrome-extension .content{
+    width: 400px;
+    box-sizing: border-box;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100001;
+    background-color: #4D157D;
+    color: #fff;
+    padding: 25px;
+}
+
+#teste-chrome-extension span{
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    cursor: pointer;
+    font-size: 25px;
+    color: #ccc;
+}
+
+#teste-chrome-extension h1{
+    margin-bottom: 20px;
+}
+
+#teste-chrome-extension .infos{
+    padding: 25px;
+    padding-bottom: 10px;
+}
+
+#teste-chrome-extension p, #teste-chrome-extension h3{
+    padding-top: 10px;
+}
+
+#teste-chrome-extension .botao{
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+}
+
+#teste-chrome-extension button{
+    padding: 7px 20px;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    outline: none;
+    background-color: #ddd;
+    color:#4D157D;
+    font-weight: bolder;
+}
+
+#teste-chrome-extension button:hover{
+    background-color: #fff;
+}
+
+#teste-chrome-extension h2{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#teste-chrome-extension .modal-content{
+    width: 400px;
+    box-sizing: border-box;
+    position: fixed;
+    background-color: #4D157D;
+    color: #fff;
+    left: 0;
+    top: 0;
+    z-index: 100001;
+    padding: 25px;
+    padding-top: 35px;
+    display: none;
+}
+
+#teste-chrome-extension select, textarea, button{
+    padding: 7px;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    outline: none;
+    background-color: #fff;
+    color:#4D157D;
+    border: none;
+}
+
+#teste-chrome-extension button{
+    padding: 7px 20px;
+    font-weight: bolder;
+    background-color: #ddd;
+}
+
+#teste-chrome-extension button:hover{
+    background-color: #fff;
+}
+
+#teste-chrome-extension select {
+    width: 100%;
+    margin-bottom: 18px;
+    font-size: 16px;
+}
+
+#teste-chrome-extension textarea{
+    width: 100%;
+    resize: none;
+    width: 350px;
+    box-sizing: border-box;
+    margin-top: 8px;
+    margin-bottom: 18px;
+}
+
+#teste-chrome-extension .botao{
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+}
+
+#teste-chrome-extension a{
+    color: #bbb;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script>
+
+	$(function(){
+
+    var body = document.body,
+        html = document.documentElement;
+
+    var h = Math.max( body.scrollHeight, body.offsetHeight,
+                   html.clientHeight, html.scrollHeight, html.offsetHeight );
+
+    var w = Math.max( body.scrollWidth, body.offsetWidth,
+                                  html.clientWidth, html.scrollWidth, html.offsetWidth);
+
+    var $overlay_top = $("#overlay-top-teste"), $overlay_left = $("#overlay-left-teste"),
+        $overlay_right = $("#overlay-right-teste"), $overlay_bottom = $("#overlay-bottom-teste");
+
+    var $popup = $(".content", "#teste-chrome-extension");
+    var $popup2 = $(".modal-content", "#teste-chrome-extension");
+
+
+    $(window).resize(function() {
+      var css = {width: 0, height: 0, left:0, bottom:0};
+      $overlay_top.css(css);
+      $overlay_left.css(css);
+      $overlay_right.css(css);
+      $overlay_bottom.css(css);
+      h = Math.max( body.scrollHeight, body.offsetHeight,
+                     html.clientHeight, html.scrollHeight, html.offsetHeight );
+
+      w = Math.max( body.scrollWidth, body.offsetWidth,
+                                    html.clientWidth, html.scrollWidth, html.offsetWidth);
+    });
+
+    var flag = true;
+
+    $("#close", $popup).click(function(){
+      $popup.hide();
+      $("#teste-chrome-extension").remove();
+      $(document).unbind("mouseout");
+      $(document).unbind("mouseover");
+    });
+
+    $("#comecar", $popup).click(function(){
+      $popup.hide();
+      flag = false;
+    });
+
+    $("#close", $popup2).click(function(){
+      $popup2.hide();
+      flag = false;
+    });
+
+    $('*').click(function(event) {
+      if($(this).parents("#teste-chrome-extension .content").length || $(this).parents("#teste-chrome-extension .modal-content").length){
+        return true;
+      }
+      event.preventDefault();
+    });
+
+		$(document).on('mouseover', function(e) {
+		    var margin = 15;
+		    var $elem = $(e.target);
+
+        if(flag) return;
+
+        $elem.bind("click.myEvents", function(e){
+          if($elem == $overlay_top || $elem == $overlay_left || $elem == $overlay_right
+            || $elem == $overlay_bottom || $elem == $popup || $elem.parents("#teste-chrome-extension .content").length
+            || $elem == $popup2 || $elem.parents("#teste-chrome-extension .modal-content").length){
+            return false;
+          }
+
+          e.preventDefault();
+          $popup2.show();
+          flag = true;
+        });
+        if($elem == $overlay_top || $elem == $overlay_left || $elem == $overlay_right
+          || $elem == $overlay_bottom || $elem == $popup || $elem.parents("#teste-chrome-extension .content").length
+          || $elem == $popup2 || $elem.parents("#teste-chrome-extension .modal-content").length){
+          var css = {width: 0, height: 0, left:0, bottom:0};
+          $overlay_top.css(css);
+          $overlay_left.css(css);
+          $overlay_right.css(css);
+          $overlay_bottom.css(css);
+
+          return;
+        }
+
+		    var p = $elem.offset();
+		    var l = p.left;
+		    var t = p.top;
+		    var r = l + $elem.width() + parseInt($elem.css("paddingLeft")) + parseInt($elem.css("paddingRight")) + parseInt($elem.css("borderLeft")) + parseInt($elem.css("borderRight"));
+		    var b = t + $elem.height() + parseInt($elem.css("paddingTop")) + parseInt($elem.css("paddingBottom")) + parseInt($elem.css("borderTop")) + parseInt($elem.css("borderBottom"));
+
+		    $overlay_top.css({
+		    	height: (t - margin)+"px",
+		 	    top: 0,
+          width: w,
+          left:0
+		    });
+		    $overlay_right.css({
+          top: t - margin,
+		      height: (b - t + 2*margin)+"px",
+		      left: r + margin,
+          width: (w - r - margin)+"px"
+		    });
+		    $overlay_left.css({
+		      top: t - margin,
+		      height: (b - t + 2*margin)+"px",
+          width: (l - margin)+"px",
+		      left: 0
+		    });
+		    $overlay_bottom.css({
+		      height: (h - b - margin)+"px",
+		      top: b+margin,
+          width: w,
+          left:0
+		    });
+		});
+
+    $(document).on('mouseout', function(e) {
+      var $elem = $(e.target);
+      if($elem == $overlay_top || $elem == $overlay_left || $elem == $overlay_right
+        || $elem == $overlay_bottom || $elem == $popup || $elem.parents("#teste-chrome-extension .content").length
+        || $elem == $popup2 || $elem.parents("#teste-chrome-extension .modal-content").length){
+        return false;
+      }
+      $elem.unbind("click.myEvents");
+    });
+	});
+
+</script>
+
+</div>
