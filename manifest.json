@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+  "name":"Teste",
+  "version": "0.1",
+  "description": "test for a hackathon",
+  "browser_action": {
+    "deafult_icon": "favicon.ico"
+  },
+  "permissions":["tabs", "activeTab", "<all_urls>"],
+  "content_scripts":[{
+  	"matches": ["http://*/*", "https://*/*"],
+  	"js": ["content.js", "jquery.js"]
+  }],
+  "background": {
+     "scripts": ["jquery.js", "background.js"]
+  },
+  "web_accessible_resources":[
+	   "html1.html",
+	   "jquery.js",
+     "https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
+  ]
+}
